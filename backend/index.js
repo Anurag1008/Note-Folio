@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/branches", branchRoutes);
-app.use("/branches/:bid", semesterRoutes);
+app.use("/semesters", semesterRoutes);
 app.use("/notes/:sid", notesRoutes);
 
 app.listen(5000, () => {
