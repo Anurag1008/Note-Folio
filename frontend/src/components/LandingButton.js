@@ -5,7 +5,7 @@ const LandingButton = ({ title, link }) => {
   return (
     <Link
       to={link}
-      className="text-white outline outline-2 outline-white px-10 py-3 rounded-full  hover:bg-gray-700 transition-all duration-150 hover:outline-none"
+      className="text-blue-200 outline outline-2 outline-blue-500 px-10 py-3 rounded-full hover:text-white  hover:bg-blue-500 transition-all duration-150 hover:outline-none"
     >
       {title}
     </Link>

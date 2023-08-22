@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const branchRoutes = require("./routes/branch");
 const semesterRoutes = require("./routes/semester");
 const notesRoutes = require("./routes/notes");
+const cors = require("cors");
 const app = express();
 
 mongoose
@@ -15,6 +16,7 @@ mongoose
     console.log("Error connecting to database");
   });
 
+app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {

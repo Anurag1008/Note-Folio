@@ -1,0 +1,122 @@
+// Below code is for inserting data for the branch.
+
+let branches = [
+  "Chemical Engineering",
+  "Mechanical Engineering",
+  "Civil Engineering",
+  "Computer Science & Engg",
+  "Electrical Engineering",
+  "E&C Engineering",
+  "Metallurgical Engineering",
+  "Information technology",
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+];
+
+const images = [
+  "H9t723yPjYI",
+  "3dyDozzCORw",
+  "S25KLdGOT1U",
+  "Bd7gNnWJBkU",
+  "9_vReDaom2Q",
+  "jXFo7R7eCCg",
+  "5Kt4DKFUiQk",
+  "64YrPKiguAE",
+  "05A-kdOH6Hw",
+  "d7SxBxEAOfU",
+  "H9t723yPjYI",
+];
+
+const description = [
+  "Master chemical engineering with our quality notes, blending theoretical clarity and real-world applications to catalyze your academic and professional growth",
+  "Fuel your mechanical engineering success with our top-tier notes, engineered to ignite comprehensive understanding and innovation in every aspect of the field.",
+  "Empower your civil engineering studies with our unparalleled notes, offering in-depth insights and practical wisdom to build a solid foundation for your career",
+  "Unleash your potential in computer science engineering with our exceptional notes, coding insights, and algorithmic mastery, propelling you towards technological brilliance.",
+  "Electrify your learning in electrical engineering with our illuminating notes, circuitry blueprints, and power-packed resources, sparking excellence in every endeavor.",
+  "Elevate your E&C engineering prowess with our cutting-edge notes, seamlessly integrating electronics and communication principles to amplify your technical expertise.",
+  "Forge a path to success in metallurgical engineering with our premium notes, combining metallurgy insights and material science knowledge to shape your brilliance in the field.",
+  "Navigate the world of IT engineering with finesse using our comprehensive notes, coding acumen, and system design wisdom, empowering you to engineer digital transformations with expertise.",
+  "Unlock the beauty of mathematics with our exceptional notes, offering clear explanations and problem-solving strategies to inspire mathematical mastery and innovation.",
+  "Embark on a journey through the fascinating realm of physics with our enriched notes, unraveling complex concepts and equations to illuminate your path of scientific discovery.",
+  "Dive into the world of chemistry with our comprehensive notes, breaking down intricate reactions and principles to catalyze your understanding and success in this molecular realm.",
+];
+
+router.get("/", async (req, res) => {
+  for (let i = 0; i < branches.length; i++) {
+    await Branch.create({
+      name: branches[i],
+      semesters: [],
+      subjects: [],
+      imgUrl: `https://source.unsplash.com/${images[i]}`,
+      description: description[i],
+    });
+  }
+  return res.status(200).json({ data: images });
+  // const branches = await Branch.find({});
+  // return res.status(200).json({ data: branches });
+});
+
+// Use this to populate your semester data
+
+const semesterDescription =
+  "Elevate your semester with our exceptional notes, a holistic blend of clarity and depth, guiding you through subjects with precision and setting the course for academic excellence.";
+
+const semesterImages = [
+  "h58gEQi1Yss",
+  "FcLyt7lW5wg",
+  "iQPr1XkF5F0",
+  "g1Kr4Ozfoac",
+  "4-EeTnaC1S4",
+  "qlP7MgTFwpk",
+  "ZGtcWiCshtc",
+  "_kd5cxwZOK4",
+];
+
+branches = [
+  "Chemical Engineering",
+  "Mechanical Engineering",
+  "Civil Engineering",
+  "Computer Science & Engg",
+  "Electrical Engineering",
+  "E&C Engineering",
+  "Metallurgical Engineering",
+  "Information technology",
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+];
+
+const semBranches = [
+  "Chemical Engineering",
+  "Mechanical Engineering",
+  "Civil Engineering",
+  "CSE Science & Engg",
+  "Electrical Engineering",
+  "E&C Engineering",
+  "MME Engineering",
+  "IT technology",
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+];
+
+router.get("/", async (req, res) => {
+  for (let i = 0; i < branches.length; i++) {
+    const branch = await Branch.findOne({ name: branches[i] });
+    for (let j = 0; j < 8; j++) {
+      const semester = await Semester.create({
+        name: `${semBranches[i].slice(0, 3).toUpperCase()}-SEM${j + 1}`,
+        branch: branch._id,
+        subjects: [],
+        imgUrl: `https://source.unsplash.com/${semesterImages[j]}`,
+        description: semesterDescription,
+      });
+      branch.semesters.push(semester._id);
+      await branch.save();
+    }
+  }
+  return res.status(200).json({ data: branches });
+  // const semesters = await Semester.find({});
+  // return res.status(200).json({ data: semesters });
+});

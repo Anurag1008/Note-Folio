@@ -9,7 +9,7 @@ const Hero = () => {
       <div className="w-2/3 h-96 pr-24 pt-96 ps-16">
         <h1 className="text-4xl font-semibold text-white mb-8">
           Unlock Your Success with Notes That <br />
-          Truly Stand Out!
+          <span className="text-blue-500">Truly Stand Out!</span>
         </h1>
         <p className="text-white">
           Elevate your college journey with our meticulously crafted notes,
@@ -17,7 +17,7 @@ const Hero = () => {
           materials, ace your exams, and embrace success with confidence. Join
           us today and unleash the power of exceptional learning resources
         </p>
-        <button className="bg-black text-white mt-10 px-14 py-4 font-semibold text-lg rounded-full">
+        <button className="bg-blue-500 text-white mt-10 px-14 py-4 font-semibold text-lg rounded-full">
           Explore Notes
         </button>
       </div>
