@@ -1,6 +1,6 @@
 // Below code is for inserting data for the branch.
 
-const branches = [
+let branches = [
   "Chemical Engineering",
   "Mechanical Engineering",
   "Civil Engineering",
@@ -55,4 +55,68 @@ router.get("/", async (req, res) => {
   return res.status(200).json({ data: images });
   // const branches = await Branch.find({});
   // return res.status(200).json({ data: branches });
+});
+
+// Use this to populate your semester data
+
+const semesterDescription =
+  "Elevate your semester with our exceptional notes, a holistic blend of clarity and depth, guiding you through subjects with precision and setting the course for academic excellence.";
+
+const semesterImages = [
+  "h58gEQi1Yss",
+  "FcLyt7lW5wg",
+  "iQPr1XkF5F0",
+  "g1Kr4Ozfoac",
+  "4-EeTnaC1S4",
+  "qlP7MgTFwpk",
+  "ZGtcWiCshtc",
+  "_kd5cxwZOK4",
+];
+
+branches = [
+  "Chemical Engineering",
+  "Mechanical Engineering",
+  "Civil Engineering",
+  "Computer Science & Engg",
+  "Electrical Engineering",
+  "E&C Engineering",
+  "Metallurgical Engineering",
+  "Information technology",
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+];
+
+const semBranches = [
+  "Chemical Engineering",
+  "Mechanical Engineering",
+  "Civil Engineering",
+  "CSE Science & Engg",
+  "Electrical Engineering",
+  "E&C Engineering",
+  "MME Engineering",
+  "IT technology",
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+];
+
+router.get("/", async (req, res) => {
+  for (let i = 0; i < branches.length; i++) {
+    const branch = await Branch.findOne({ name: branches[i] });
+    for (let j = 0; j < 8; j++) {
+      const semester = await Semester.create({
+        name: `${semBranches[i].slice(0, 3).toUpperCase()}-SEM${j + 1}`,
+        branch: branch._id,
+        subjects: [],
+        imgUrl: `https://source.unsplash.com/${semesterImages[j]}`,
+        description: semesterDescription,
+      });
+      branch.semesters.push(semester._id);
+      await branch.save();
+    }
+  }
+  return res.status(200).json({ data: branches });
+  // const semesters = await Semester.find({});
+  // return res.status(200).json({ data: semesters });
 });
