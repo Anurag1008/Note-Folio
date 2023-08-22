@@ -16,11 +16,11 @@ export default function App() {
         {/* <Navbar /> */}
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/Branches" element={<Branches />} />
-          <Route path="/Landing" element={<Landing />} />
-          <Route path="/Note" element={<Note />} />
-          <Route path="/Semester" element={<Semester />} />
-          <Route path="/Teacher" element={<Teacher />} />
+          <Route path="/branches" element={<Branches />} />
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/notes" element={<Note />} />
+          <Route path="/semester" element={<Semester />} />
+          <Route path="/teacher" element={<Teacher />} />
         </Routes>
       </div>
     </Router>

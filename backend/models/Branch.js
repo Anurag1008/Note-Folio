@@ -18,7 +18,11 @@ const branchSchema = new mongoose.Schema({
       ref: "Subject",
     },
   ],
-  img: {
+  imgUrl: {
+    type: String,
+    required: true,
+  },
+  description: {
     type: String,
     required: true,
   },
