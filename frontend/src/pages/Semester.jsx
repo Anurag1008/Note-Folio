@@ -2,18 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { branchesUrl } from "../utils/branchUrls";
 import Card from "../components/Card";
+import axios from 'axios';
 
 const Semester = ({ selectedBranch }) => {
   const [semesters, setSemesters] = useState([]);
-  useEffect(() => {
-    const getBranch = async () => {
-      let response = await fetch(`${branchesUrl}/${selectedBranch}`);
-      response = await response.json();
-      response = response.data;
-      setSemesters(response);
-    };
-    getBranch();
-  }, []);
+  
+  useEffect(()=>{
+    axios.get(`${branchesUrl}`).then((response)=>setSemesters(response.semesters)
+  )},[])
 
   return (
     <div className="w-full flex flex-col items-center mt-5 px-20 pb-20">
